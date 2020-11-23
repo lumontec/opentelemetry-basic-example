@@ -42,10 +42,7 @@ import (
 func initProvider() func() {
 	ctx := context.Background()
 
-	// otelAgentAddr, ok := os.LookupEnv("OTEL_AGENT_ENDPOINT")
-	// if !ok {
 	collectorAddr := "0.0.0.0:55680"
-	// }
 
 	exp, err := otlp.NewExporter(
 		otlp.WithInsecure(),

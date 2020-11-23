@@ -8,8 +8,11 @@ receivers:
         - https://*
 
 exporters:
-  zipkin:
-    endpoint: "http://zipkin-all-in-one:9411/api/v2/spans"
+#  zipkin:
+#    endpoint: "http://zipkin-all-in-one:9411/api/v2/spans"
+  jaeger:
+    endpoint: "jaeger-all-in-one:14250"
+    insecure: true
   prometheus:
     endpoint: "0.0.0.0:9464"
 
@@ -21,7 +24,8 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [zipkin]
+#      exporters: [zipkin, jaeger]
+      exporters: [jaeger]
       processors: [batch, queued_retry]
     metrics:
       receivers: [otlp]

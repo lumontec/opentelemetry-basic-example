@@ -12,13 +12,14 @@ services:
       - "55680:55680"
       - "55681:55681"
     depends_on:
-      - zipkin-all-in-one
+#      - zipkin-all-in-one
+      - jaeger-all-in-one
 
-  # Zipkin
-  zipkin-all-in-one:
-    image: openzipkin/zipkin:latest
-    ports:
-      - "9411:9411"
+#  # Zipkin
+#  zipkin-all-in-one:
+#    image: openzipkin/zipkin:latest
+#    ports:
+#      - "9411:9411"
 
   # Prometheus
   prometheus:
@@ -28,3 +29,11 @@ services:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
+
+  # Jaeger
+  jaeger-all-in-one:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268"
+      - "14250"
